@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 
-import { useLocalStorage } from '../utils/useLocalStorage';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 import { setIsDarkMode } from '../slices/themeSlice';
 
 export default function Header() {
