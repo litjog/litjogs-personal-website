@@ -61,6 +61,14 @@ a[target='_blank']::after {
   content: '↗';
 }
 
+label[for] {
+  cursor: pointer;
+}
+
+input#themeCheckbox {
+  display: none;
+}
+
 .container {
   height: 100%;
   display: grid;

@@ -1,17 +1,19 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
-import { toggleDarkMode, setIsDarkMode } from '../slices/themeSlice';
+
+import { useLocalStorage } from '../utils/useLocalStorage';
+import { setIsDarkMode } from '../slices/themeSlice';
 
 export default function Header() {
   const dispatch = useDispatch();
   const { isDarkMode } = useSelector((state) => state.theme);
+  const [theme, setTheme] = useLocalStorage('theme', 'dark');
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') ?? 'dark';
-    document.body.classList.toggle('dark-mode', savedTheme === 'dark');
-    dispatch(setIsDarkMode(savedTheme === 'dark'));
-  }, [dispatch]);
+    dispatch(setIsDarkMode(theme === 'dark'));
+    document.body.classList.toggle('dark-mode', theme === 'dark');
+  }, [dispatch, theme]);
 
   const activeLink = {
     fontWeight: 'bold',
@@ -23,7 +25,7 @@ export default function Header() {
         <nav>
           <h1>
             <Link to={`/`} style={{ textDecoration: 'none' }}>
-              🐐
+              {'🐐'}
             </Link>
           </h1>
           <ul>
@@ -51,15 +53,17 @@ export default function Header() {
                 Contact
               </NavLink>
             </li>
-            <li
-              style={{ cursor: 'pointer' }}
-              onClick={() => {
-                document.body.classList.toggle('dark-mode', !isDarkMode);
-                localStorage.setItem('theme', isDarkMode ? 'light' : 'dark');
-                dispatch(toggleDarkMode());
-              }}
-            >
-              {isDarkMode ? '☀️' : '🌙'}
+            <li>
+              <input
+                name="themeCheckbox"
+                id="themeCheckbox"
+                type="checkbox"
+                checked={isDarkMode}
+                onChange={(e) => {
+                  setTheme(e.target.checked ? 'dark' : 'light');
+                }}
+              />
+              <label htmlFor="themeCheckbox">{isDarkMode ? '☀️' : '🌙'}</label>
             </li>
           </ul>
         </nav>

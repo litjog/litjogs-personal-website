@@ -5,7 +5,7 @@ export default function NotFound() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') ?? 'dark';
+    const savedTheme = JSON.parse(localStorage.getItem('theme')) ?? 'dark';
     document.body.classList.toggle('dark-mode', savedTheme === 'dark');
   }, []);
 
