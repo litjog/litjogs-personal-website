@@ -39,4 +39,4 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 ## Live Site
 
-Site is live [https://litjog.netlify.app/](https://litjog.netlify.app/).
+<!-- Site is live [https://litjog.netlify.app/](https://litjog.netlify.app/). -->
